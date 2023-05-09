@@ -45,7 +45,8 @@ body {
   max-width: 700px;
 }
 
-.comment-wrapper {
+.comment-wrapper,
+.reply-wrapper {
   background-color: var(--White);
   border-radius: 0.4rem;
   padding: 1rem;
@@ -57,24 +58,28 @@ body {
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.02);
 }
 
-.comment_user {
+.comment_user,
+.reply_user {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding-bottom: 1rem;
 }
 
-.comment_avatar img {
+.comment_avatar img,
+.reply_user img {
   width: 30px;
 }
 
-.comment_username {
+.comment_username,
+.reply_username {
   color: var(--Dark-blue);
   font-weight: 500;
 }
 
 .created-at,
-.comment_text {
+.comment_text,
+.reply_text {
   color: var(--Grayish-Blue);
 }
 
@@ -99,7 +104,8 @@ body {
   color: var(--Moderate-blue);
 }
 
-.comment_buttons {
+.comment_buttons,
+.reply_buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;

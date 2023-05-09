@@ -7,26 +7,82 @@ fetch("data.json")
 
     comments = commentsList.map((comment) => {
       //console.log(comment.content);
-      console.log(comment.replies[0]);
       return {
         content: comment.content,
         createdAt: comment.createdAt,
         score: comment.score,
         username: comment.user.username,
         avatar: comment.user.image.png,
-        replies: comment.replies,
       };
     });
 
+    //console.log(comments);
+
     const currentUser = data.currentUser;
-    console.log(currentUser.image.png);
+    //console.log(currentUser.image.png);
 
     //console.log(comments);
     renderCommentsList(comments, currentUser);
   });
 
 const createComment = (comment) => {
-  // CREATE ELEMENTS
+  // REPLY
+
+  const replyWrapper = document.createElement("div");
+  replyWrapper.classList.add("reply-wrapper");
+
+  const replyContent = document.createElement("div");
+  replyContent.classList.add("reply");
+
+  const replyUser = document.createElement("div");
+  replyUser.classList.add("reply_user");
+
+  const replyAvatar = document.createElement("a");
+  replyAvatar.href = "#";
+  replyAvatar.classList.add("reply_avatar");
+
+  const replyAvatarImg = document.createElement("img");
+  replyAvatarImg.src = "images/avatars/image-amyrobson.png";
+
+  const replyUserName = document.createElement("a");
+  replyUserName.href = "#";
+  replyUserName.classList.add("reply_username");
+  replyUserName.innerText = "maxblagun";
+
+  const replyCreatedAt = document.createElement("span");
+  replyCreatedAt.classList.add("created-at");
+
+  replyCreatedAt.innerText = " 1 week ago";
+
+  const replyText = document.createElement("p");
+  replyText.classList.add("reply_text");
+  replyText.innerText =
+    "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first";
+
+  const replyButtons = document.createElement("div");
+  replyButtons.classList.add("reply_buttons");
+
+  replyButtons.innerHTML = `
+         <div class="score">
+           <button class="plus">+</button><span     class="score_value"></span>
+           <button class="minus">-</button>
+        </div>
+        <button class="reply-btn">
+          <img src="images/icon-reply.svg" alt="Reply" /> Reply
+        </button>
+    `;
+
+  // APPEND
+
+  replyAvatar.appendChild(replyAvatarImg);
+
+  replyUser.append(replyAvatar, replyUserName, replyCreatedAt);
+
+  replyContent.append(replyUser, replyText);
+
+  replyWrapper.append(replyContent, replyButtons);
+
+  // CREATE COMMENT ELEMENTS
 
   const commentReplyWrapper = document.createElement("div");
   commentReplyWrapper.classList.add("comment-and-reply-wrapper");
@@ -84,7 +140,7 @@ const createComment = (comment) => {
 
   commentWrapper.append(commentContent, commentButtons);
 
-  commentReplyWrapper.appendChild(commentWrapper);
+  commentReplyWrapper.append(commentWrapper, replyWrapper);
 
   // SCORE
 
@@ -125,7 +181,6 @@ const createCurrentUser = (currentUser) => {
 
   const currentUserAvatar = document.createElement("img");
   currentUserAvatar.classList.add("current-user-avatar");
-  console.log(currentUser.image);
   currentUserAvatar.src = currentUser.image.png;
 
   const textarea = document.createElement("textarea");
